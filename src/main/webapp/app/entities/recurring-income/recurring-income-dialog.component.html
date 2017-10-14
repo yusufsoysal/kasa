@@ -1,0 +1,79 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myRecurringIncomeLabel" jhiTranslate="kasaApp.recurringIncome.home.createOrEditLabel">Create or edit a Recurring Income</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!recurringIncome.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="recurringIncome.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.recurringIncome.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="recurringIncome.description"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.recurringIncome.incomeDay" for="field_incomeDay">Income Day</label>
+            <input type="number" class="form-control" name="incomeDay" id="field_incomeDay"
+                [(ngModel)]="recurringIncome.incomeDay" required min="1" max="31" />
+            <div [hidden]="!(editForm.controls.incomeDay?.dirty && editForm.controls.incomeDay?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.incomeDay?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.incomeDay?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                    This field should be at least 1.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.incomeDay?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 31 }">
+                    This field cannot be more than 31.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.incomeDay?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.recurringIncome.amount" for="field_amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="field_amount"
+                [(ngModel)]="recurringIncome.amount" required min="0" />
+            <div [hidden]="!(editForm.controls.amount?.dirty && editForm.controls.amount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.amount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.amount?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 0 }">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.amount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.recurringIncome.circle" for="field_circle">Circle</label>
+            <select class="form-control" id="field_circle" name="circle" [(ngModel)]="recurringIncome.circle">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="circleOption.id === recurringIncome.circle?.id ? recurringIncome.circle : circleOption" *ngFor="let circleOption of circles; trackBy: trackCircleById">{{circleOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

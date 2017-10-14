@@ -1,0 +1,24 @@
+{
+    "kasaApp": {
+        "recurringIncome" : {
+            "home": {
+                "title": "Recurring Incomes",
+                "createLabel": "Create a new Recurring Income",
+                "createOrEditLabel": "Create or edit a Recurring Income"
+            },
+            "created": "A new Recurring Income is created with identifier {{ param }}",
+            "updated": "A Recurring Income is updated with identifier {{ param }}",
+            "deleted": "A Recurring Income is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Recurring Income {{ id }}?"
+            },
+            "detail": {
+                "title": "Recurring Income"
+            },
+            "description": "Description",
+            "incomeDay": "Income Day",
+            "amount": "Amount",
+            "circle": "Circle"
+        }
+    }
+}

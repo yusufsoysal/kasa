@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="kasaApp.budget.home.title">Budgets</span>
+        <button class="btn btn-primary float-right jh-create-entity create-budget" [routerLink]="['/', { outlets: { popup: ['budget-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="kasaApp.budget.home.createLabel">
+            Create new Budget
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="budgets">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="kasaApp.budget.amount">Amount</span></th>
+            <th><span jhiTranslate="kasaApp.budget.remainingAmount">Remaining Amount</span></th>
+            <th><span jhiTranslate="kasaApp.budget.year">Year</span></th>
+            <th><span jhiTranslate="kasaApp.budget.month">Month</span></th>
+            <th><span jhiTranslate="kasaApp.budget.circle">Circle</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let budget of budgets ;trackBy: trackId">
+                <td><a [routerLink]="['../budget', budget.id ]">{{budget.id}}</a></td>
+                <td>{{budget.amount}}</td>
+                <td>{{budget.remainingAmount}}</td>
+                <td>{{budget.year}}</td>
+                <td>{{budget.month}}</td>
+                <td>
+                    <div *ngIf="budget.circle">
+                        <a [routerLink]="['../circle', budget.circle?.id ]" >{{budget.circle?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../budget', budget.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'budget/'+ budget.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'budget/'+ budget.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

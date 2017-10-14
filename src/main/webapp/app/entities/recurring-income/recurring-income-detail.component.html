@@ -1,0 +1,39 @@
+
+<div *ngIf="recurringIncome">
+    <h2><span jhiTranslate="kasaApp.recurringIncome.detail.title">Recurring Income</span> {{recurringIncome.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="kasaApp.recurringIncome.description">Description</span></dt>
+        <dd>
+            <span>{{recurringIncome.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.recurringIncome.incomeDay">Income Day</span></dt>
+        <dd>
+            <span>{{recurringIncome.incomeDay}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.recurringIncome.amount">Amount</span></dt>
+        <dd>
+            <span>{{recurringIncome.amount}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.recurringIncome.circle">Circle</span></dt>
+        <dd>
+            <div *ngIf="recurringIncome.circle">
+                <a [routerLink]="['/circle', recurringIncome.circle?.id]">{{recurringIncome.circle?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'recurring-income/'+ recurringIncome.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

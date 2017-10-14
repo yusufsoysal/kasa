@@ -1,0 +1,61 @@
+
+<div *ngIf="expense">
+    <h2><span jhiTranslate="kasaApp.expense.detail.title">Expense</span> {{expense.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="kasaApp.expense.location">Location</span></dt>
+        <dd>
+            <span>{{expense.location}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.expense.lat">Lat</span></dt>
+        <dd>
+            <span>{{expense.lat}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.expense.lon">Lon</span></dt>
+        <dd>
+            <span>{{expense.lon}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.expense.description">Description</span></dt>
+        <dd>
+            <span>{{expense.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.expense.dateTime">Date Time</span></dt>
+        <dd>
+            <span>{{expense.dateTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.expense.amount">Amount</span></dt>
+        <dd>
+            <span>{{expense.amount}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.expense.user">User</span></dt>
+        <dd>
+            {{expense.user?.id}}
+        </dd>
+        <dt><span jhiTranslate="kasaApp.expense.circle">Circle</span></dt>
+        <dd>
+            <div *ngIf="expense.circle">
+                <a [routerLink]="['/circle', expense.circle?.id]">{{expense.circle?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.expense.category">Category</span></dt>
+        <dd>
+            <div *ngIf="expense.category">
+                <a [routerLink]="['/category', expense.category?.id]">{{expense.category?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'expense/'+ expense.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

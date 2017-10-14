@@ -1,0 +1,29 @@
+{
+    "kasaApp": {
+        "expense" : {
+            "home": {
+                "title": "Expenses",
+                "createLabel": "Create a new Expense",
+                "createOrEditLabel": "Create or edit a Expense"
+            },
+            "created": "A new Expense is created with identifier {{ param }}",
+            "updated": "A Expense is updated with identifier {{ param }}",
+            "deleted": "A Expense is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Expense {{ id }}?"
+            },
+            "detail": {
+                "title": "Expense"
+            },
+            "location": "Location",
+            "lat": "Lat",
+            "lon": "Lon",
+            "description": "Description",
+            "dateTime": "Date Time",
+            "amount": "Amount",
+            "user": "User",
+            "circle": "Circle",
+            "category": "Category"
+        }
+    }
+}

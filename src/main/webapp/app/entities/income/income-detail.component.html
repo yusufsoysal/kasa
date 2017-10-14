@@ -1,0 +1,39 @@
+
+<div *ngIf="income">
+    <h2><span jhiTranslate="kasaApp.income.detail.title">Income</span> {{income.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="kasaApp.income.description">Description</span></dt>
+        <dd>
+            <span>{{income.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.income.incomeDate">Income Date</span></dt>
+        <dd>
+            <span>{{income.incomeDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.income.amount">Amount</span></dt>
+        <dd>
+            <span>{{income.amount}}</span>
+        </dd>
+        <dt><span jhiTranslate="kasaApp.income.circle">Circle</span></dt>
+        <dd>
+            <div *ngIf="income.circle">
+                <a [routerLink]="['/circle', income.circle?.id]">{{income.circle?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'income/'+ income.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

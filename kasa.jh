@@ -1,0 +1,71 @@
+entity Circle {
+	name String required
+}
+
+entity Category {
+	name String required
+}
+
+entity Expense {
+	location String,
+    lat Integer,
+    lon Integer,
+    description String,
+    dateTime ZonedDateTime required,
+    amount BigDecimal required min(0)
+}
+
+entity Budget {
+	amount BigDecimal required min(0),
+    remainingAmount BigDecimal required min(0),
+    year Integer required min(2000) max(2999),
+    month Integer required min(1) max(12)
+}
+
+entity Income {
+	description String,
+	incomeDate ZonedDateTime required,
+    amount BigDecimal required min(0)
+}
+
+entity RecurringIncome {
+	description String,
+	incomeDay Integer required min(1) max(31),
+    amount BigDecimal required min(0)
+}
+
+relationship ManyToOne {
+	Category{parent} to Category
+}
+
+relationship ManyToOne {
+	Expense{category} to Category
+}
+
+relationship OneToOne {
+	Expense{user} to User
+}
+
+relationship OneToOne {
+	Expense{circle} to Circle
+}
+
+relationship OneToOne {
+	Budget{circle} to Circle
+}
+
+relationship OneToOne {
+	Income{circle} to Circle
+}
+
+relationship OneToOne {
+	RecurringIncome{circle} to Circle
+}
+
+relationship OneToOne {
+	Category{circle} to Circle
+}
+
+relationship OneToOne {
+	Circle{owner} to User
+}

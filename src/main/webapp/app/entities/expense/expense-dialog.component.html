@@ -1,0 +1,102 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myExpenseLabel" jhiTranslate="kasaApp.expense.home.createOrEditLabel">Create or edit a Expense</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!expense.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="expense.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.expense.location" for="field_location">Location</label>
+            <input type="text" class="form-control" name="location" id="field_location"
+                [(ngModel)]="expense.location"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.expense.lat" for="field_lat">Lat</label>
+            <input type="number" class="form-control" name="lat" id="field_lat"
+                [(ngModel)]="expense.lat"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.expense.lon" for="field_lon">Lon</label>
+            <input type="number" class="form-control" name="lon" id="field_lon"
+                [(ngModel)]="expense.lon"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.expense.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="expense.description"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.expense.dateTime" for="field_dateTime">Date Time</label>
+            <div class="d-flex">
+                <input id="field_dateTime" type="datetime-local" class="form-control" name="dateTime" [(ngModel)]="expense.dateTime"
+                required  />
+            </div>
+            <div [hidden]="!(editForm.controls.dateTime?.dirty && editForm.controls.dateTime?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateTime?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.dateTime?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.expense.amount" for="field_amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="field_amount"
+                [(ngModel)]="expense.amount" required min="0" />
+            <div [hidden]="!(editForm.controls.amount?.dirty && editForm.controls.amount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.amount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.amount?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 0 }">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.amount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.expense.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="expense.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === expense.user?.id ? expense.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.expense.circle" for="field_circle">Circle</label>
+            <select class="form-control" id="field_circle" name="circle" [(ngModel)]="expense.circle">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="circleOption.id === expense.circle?.id ? expense.circle : circleOption" *ngFor="let circleOption of circles; trackBy: trackCircleById">{{circleOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="kasaApp.expense.category" for="field_category">Category</label>
+            <select class="form-control" id="field_category" name="category" [(ngModel)]="expense.category" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="categoryOption.id === expense.category?.id ? expense.category : categoryOption" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

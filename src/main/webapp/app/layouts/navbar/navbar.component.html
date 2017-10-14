@@ -1,0 +1,68 @@
+<nav class="navbar navbar-default navbar-static-top m-b-0">
+    <div class="navbar-header">
+        <a class="navbar-toggle hidden-xs" href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse">
+            <i class="fa fa-arrow-circle-o-left"></i>
+        </a>
+        <div class="top-left-part">
+            <a class="logo" routerLink="/">
+                <b><img src="../../../content/images/logo.png"/></b>
+                <span class="hidden-xs"><img src="../../../content/images/logo-text.png" alt="home"></span>
+            </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right pull-right">
+            <li>
+                <form role="search" class="app-search hidden-xs">
+                    <input type="text" placeholder="Search..." class="form-control">
+                    <a href=""><i class="fa fa-search"></i></a>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+        <mat-accordion>
+            <mat-expansion-panel class="user-pro" *ngIf="isAuthenticated()">
+                <mat-expansion-panel-header>
+                    <i class="sidebar-icon zmdi zmdi-account-circle"></i>
+                    <span class="user-name hide-menu">{{account.login}}</span>
+                </mat-expansion-panel-header>
+                <ul class="nav nav-second-level">
+                    <li><a routerLink="password"><i class="fa fa-key"></i> <span jhiTranslate="global.menu.account.password"></span></a></li>
+                    <li><a (click)="logout()"><i class="fa fa-power-off"></i> <span jhiTranslate="global.menu.account.logout"></span></a></li>
+                </ul>
+
+            </mat-expansion-panel>
+
+            <a routerLink="login" routerLinkActive="active" *ngIf="!isAuthenticated()" class="left-menu-item">
+                <i class="zmdi zmdi-square-right zmdi-hc-fw fa-fw"></i>
+                <span class="hide-menu" jhiTranslate="global.menu.account.login"> Login </span>
+            </a>
+
+            <a routerLink="register" routerLinkActive="active" *ngIf="!isAuthenticated()" class="left-menu-item">
+                <i class="fa fa-user-plus zmdi-hc-fw fa-fw"></i>
+                <span class="hide-menu" jhiTranslate="global.menu.account.register"> Register </span>
+            </a>
+
+            <a href="javascript:void(0);" class="left-menu-item "><i class="zmdi zmdi-apps zmdi-hc-fw fa-fw"></i> <span
+                class="hide-menu">Apps <span class="fa arrow"></span></span></a>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <i class="sidebar-icon zmdi zmdi-copy"></i>
+                    <span class="user-name hide-menu">Sample Pages</span>
+                </mat-expansion-panel-header>
+                <ul class="nav nav-second-level">
+                    <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
+                    <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
+                    <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
+                    <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
+                    <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
+                </ul>
+
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </div>
+</div>

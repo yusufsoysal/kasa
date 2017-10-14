@@ -1,0 +1,156 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <div class="alert alert-success" *ngIf="success" jhiTranslate="register.messages.success">
+                <strong>Registration saved!</strong> Please check your email for confirmation.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="error" jhiTranslate="register.messages.error.fail">
+                <strong>Registration failed!</strong> Please try again later.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="errorUserExists" jhiTranslate="register.messages.error.userexists">
+                <strong>Login name already registered!</strong> Please choose another one.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="errorEmailExists" jhiTranslate="register.messages.error.emailexists">
+                <strong>Email is already in use!</strong> Please choose another one.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="doNotMatch" jhiTranslate="global.messages.error.dontmatch">
+                The password and its confirmation do not match!
+            </div>
+
+            <form class="form-horizontal form-material" name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success">
+
+                <div class="form-group" [ngClass]="{'has-error': login.dirty && login.invalid }">
+                    <label class="col-md-12" jhiTranslate="global.form.username.placeholder"></label>
+
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-user-o"></i></div>
+                        <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel"
+                               required minlength="1" maxlength="50" pattern="^[_'.@A-Za-z0-9-]*$">
+                    </div>
+
+                    <div *ngIf="login.dirty && login.invalid">
+                    <span class="help-block with-errors">
+                        <ul class="list-unstyled">
+                            <li *ngIf="login.errors.required" jhiTranslate="register.messages.validate.login.required">Your username is required.</li>
+                            <li *ngIf="login.errors.minlength" jhiTranslate="register.messages.validate.login.minlength">Your username is required to be at least 1 character.</li>
+                            <li *ngIf="login.errors.maxlength" jhiTranslate="register.messages.validate.login.maxlength">Your username cannot be longer than 50 characters.</li>
+                            <li *ngIf="login.errors.pattern" jhiTranslate="register.messages.validate.login.pattern">Your username can only contain lower-case letters and digits.</li>
+                        </ul>
+                    </span>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': name.dirty && name.invalid }">
+                    <label class="col-md-12" jhiTranslate="global.form.name.placeholder"></label>
+
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-id-card-o"></i></div>
+                        <input type="text" class="form-control" [(ngModel)]="registerAccount.firstName" id="name" name="name" #name="ngModel"
+                               required minlength="1" maxlength="50">
+                    </div>
+
+                    <div *ngIf="name.dirty && name.invalid">
+                    <span class="help-block with-errors">
+                        <ul class="list-unstyled">
+                            <li *ngIf="name.errors.required" jhiTranslate="register.messages.validate.name.required">Your name is required.</li>
+                            <li *ngIf="name.errors.minlength" jhiTranslate="register.messages.validate.name.minlength">Your name is required to be at least 1 character.</li>
+                            <li *ngIf="name.errors.maxlength" jhiTranslate="register.messages.validate.name.maxlength">Your name cannot be longer than 50 characters.</li>
+                        </ul>
+                    </span>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': surname.dirty && surname.invalid }">
+                    <label class="col-md-12" jhiTranslate="global.form.surname.placeholder"></label>
+
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-id-card-o"></i></div>
+                        <input type="text" class="form-control" [(ngModel)]="registerAccount.lastName" id="surname" name="surname" #surname="ngModel"
+                               required minlength="1" maxlength="50">
+                    </div>
+
+                    <div *ngIf="surname.dirty && surname.invalid">
+                        <span class="help-block with-errors">
+                            <ul class="list-unstyled">
+                                <li *ngIf="surname.errors.required" jhiTranslate="register.messages.validate.surname.required">Your surname is required.</li>
+                                <li *ngIf="surname.errors.minlength" jhiTranslate="register.messages.validate.surname.minlength">Your surname is required to be at least 1 character.</li>
+                                <li *ngIf="surname.errors.maxlength" jhiTranslate="register.messages.validate.surname.maxlength">Your surname cannot be longer than 50 characters.</li>
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': email.dirty && email.invalid }">
+                    <label class="col-md-12" jhiTranslate="global.form.email.placeholder"></label>
+
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                        <input type="email" class="form-control" id="email" name="email" #email="ngModel"
+                               [(ngModel)]="registerAccount.email" minlength=5 maxlength=100 email required>
+                    </div>
+
+                    <div *ngIf="email.dirty && email.invalid">
+                        <span class="help-block with-errors">
+                            <ul class="list-unstyled">
+                                <li *ngIf="email.errors.required" jhiTranslate="global.messages.validate.email.required">Your email is required.</li>
+                                <li *ngIf="email.errors.invalid" jhiTranslate="global.messages.validate.email.invalid">Your email is invalid.</li>
+                                <li *ngIf="email.errors.minlength" jhiTranslate="global.messages.validate.email.minlength">Your email is required to be at least 5 characters.</li>
+                                <li *ngIf="email.errors.maxlength" jhiTranslate="global.messages.validate.email.maxlength">Your email cannot be longer than 100 characters.</li>
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': password.dirty && password.invalid }">
+                    <label class="col-md-12" jhiTranslate="global.form.newpassword.placeholder"></label>
+
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                        <input type="password" class="form-control" id="password" name="password" #password="ngModel"
+                               [(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required>
+                    </div>
+
+                    <div *ngIf="password.dirty && password.invalid">
+                        <span class="help-block with-errors">
+                            <ul class="list-unstyled">
+                                <li *ngIf="password.errors.required" jhiTranslate="global.messages.validate.newpassword.required">Your password is required.</li>
+                                <li *ngIf="password.errors.minlength" jhiTranslate="global.messages.validate.newpassword.minlength">Your password is required to be at least 4 characters.</li>
+                                <li *ngIf="password.errors.maxlength" jhiTranslate="global.messages.validate.newpassword.maxlength">Your password cannot be longer than 50 characters.</li>
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': confirmPasswordInput.dirty && confirmPasswordInput.invalid }">
+                    <label class="col-md-12" jhiTranslate="global.form.confirmpassword.placeholder"></label>
+
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel"
+                               [(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>
+                    </div>
+
+                    <div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
+                        <span class="help-block with-errors">
+                            <ul class="list-unstyled">
+                                <li *ngIf="confirmPasswordInput.errors.required" jhiTranslate="global.messages.validate.confirmpassword.required">Your confirmation password is required.</li>
+                                <li *ngIf="confirmPasswordInput.errors.minlength" jhiTranslate="global.messages.validate.confirmpassword.minlength">Your confirmation password is required to be at least 4 characters.</li>
+                                <li *ngIf="confirmPasswordInput.errors.maxlength" jhiTranslate="global.messages.validate.confirmpassword.maxlength">Your confirmation password cannot be longer than 50 characters.</li>
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" [disabled]="registerForm.form.invalid" type="submit" jhiTranslate="register.form.button">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

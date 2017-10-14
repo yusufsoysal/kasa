@@ -1,0 +1,13 @@
+/* after changing this file run 'yarn run 'yarn run webpack:build' */
+$fa-font-path: '~font-awesome/fonts';
+$zmdi-font-path: '~material-design-iconic-font/dist/fonts';
+
+/***************************
+put Sass variables here:
+eg $input-color: red;
+****************************/
+// Import Bootstrap source files from node_modules
+@import '~bootstrap/scss/bootstrap';
+@import '~font-awesome/scss/font-awesome';
+@import '~material-design-iconic-font/scss/material-design-iconic-font';
+@import '~metismenu/dist/metisMenu';
