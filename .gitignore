@@ -1,8 +1,9 @@
 ######################
 # Project Specific
 ######################
+src/main/resources/config/application-dev.yml
+src/main/resources/config/application-prod.yml
 /src/main/webapp/content/css/main.css
-/target/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
 
@@ -20,37 +21,6 @@ npm-debug.log.*
 .sass-cache/
 
 ######################
-# Eclipse
-######################
-*.pydevproject
-.project
-.metadata
-tmp/
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
-.factorypath
-/src/main/resources/rebel.xml
-
-# External tool builders
-.externalToolBuilders/**
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# CDT-specific
-.cproject
-
-# PDT-specific
-.buildpath
-
-######################
 # Intellij
 ######################
 .idea/
@@ -61,22 +31,12 @@ local.properties
 *.orig
 classes/
 
-######################
-# Visual Studio Code
-######################
-.vscode/
 
 ######################
 # Maven
 ######################
-/log/
-/target/
-
-######################
-# Gradle
-######################
-.gradle/
-/build/
+target/
+.mvn/
 
 ######################
 # Package Files
@@ -86,14 +46,6 @@ classes/
 *.ear
 *.db
 
-######################
-# Windows
-######################
-# Windows image file caches
-Thumbs.db
-
-# Folder config file
-Desktop.ini
 
 ######################
 # Mac OSX
@@ -104,15 +56,6 @@ Desktop.ini
 # Thumbnails
 ._*
 
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-######################
-# Directories
-######################
-/bin/
-/deploy/
 
 ######################
 # Logs
@@ -126,16 +69,6 @@ Desktop.ini
 *.*~
 *~
 .merge_file*
-
-######################
-# Gradle Wrapper
-######################
-!gradle/wrapper/gradle-wrapper.jar
-
-######################
-# Maven Wrapper
-######################
-!.mvn/wrapper/maven-wrapper.jar
 
 ######################
 # ESLint
